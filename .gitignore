@@ -1,0 +1,22 @@
+# ── NEVER push these to GitHub ────────────────────────────────────────────────
+.env
+.env.local
+.env.*
+functions/.env
+functions/.env.*
+
+# Dependencies (restored by npm install)
+node_modules/
+functions/node_modules/
+
+# Firebase (not needed for Vercel)
+.firebase/
+firebase-debug.log
+functions/
+
+# Local dev server (not needed on Vercel)
+server.js
+
+# OS files
+.DS_Store
+Thumbs.db
