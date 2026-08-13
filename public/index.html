@@ -257,6 +257,13 @@
         <span class="error-msg" id="name-error"></span>
       </div>
 
+      <!-- Customer Email -->
+      <div class="form-group">
+        <label for="customer-email">Your Email Address <span style="color:#c0392b">*</span></label>
+        <input type="email" id="customer-email" name="customerEmail" autocomplete="email" placeholder="your@email.com" />
+        <span class="error-msg" id="email-error"></span>
+      </div>
+
       <!-- Date (auto-filled, read-only) -->
       <div class="form-group">
         <label for="sign-date">Date</label>
@@ -343,12 +350,15 @@
 
     // Clear previous errors
     document.getElementById('name-error').textContent     = '';
+    document.getElementById('email-error').textContent    = '';
     document.getElementById('checkbox-error').textContent = '';
     document.getElementById('sig-error').textContent      = '';
     document.getElementById('submit-error').style.display = 'none';
     document.getElementById('passenger-name').classList.remove('field-error');
+    document.getElementById('customer-email').classList.remove('field-error');
 
     const name    = document.getElementById('passenger-name').value.trim();
+    const email   = document.getElementById('customer-email').value.trim();
     const agreed  = document.getElementById('agree-checkbox').checked;
     const sigEmpty = pad.isEmpty();
     let hasError  = false;
@@ -356,6 +366,11 @@
     if (!name) {
       document.getElementById('name-error').textContent = 'Passenger name is required.';
       document.getElementById('passenger-name').classList.add('field-error');
+      hasError = true;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('email-error').textContent = 'A valid email address is required.';
+      document.getElementById('customer-email').classList.add('field-error');
       hasError = true;
     }
     if (!agreed) {
@@ -382,6 +397,7 @@
     try {
       const payload = {
         passengerName:    name,
+        customerEmail:    email,
         signDate:         document.getElementById('sign-date').value,
         agreed:           true,
         signatureDataUrl: pad.toDataURL('image/png'),

@@ -7,10 +7,13 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { passengerName, signDate, agreed, signatureDataUrl } = req.body || {};
+  const { passengerName, signDate, agreed, signatureDataUrl, customerEmail } = req.body || {};
 
   if (!passengerName || typeof passengerName !== 'string' || passengerName.trim() === '') {
     return res.status(400).json({ error: 'Passenger name is required.' });
+  }
+  if (!customerEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) {
+    return res.status(400).json({ error: 'A valid email address is required.' });
   }
   if (!agreed) {
     return res.status(400).json({ error: 'Agreement checkbox must be checked.' });
@@ -116,9 +119,8 @@ module.exports = async function handler(req, res) {
       },
     });
 
-    await transporter.sendMail({
+    const mailOptions = {
       from:        `"Great Comfort Services" <${process.env.GMAIL_USER}>`,
-      to:          process.env.STAFF_EMAIL_RECIPIENT,
       replyTo:     process.env.GMAIL_USER,
       subject:     `Signed Agreement – ${name} – ${date}`,
       text:        emailText,
@@ -130,10 +132,16 @@ module.exports = async function handler(req, res) {
         cid:         'signature@greatcomfort',
       }],
       headers: {
-        'X-Mailer':        'Great Comfort Services',
+        'X-Mailer': 'Great Comfort Services',
         'X-Auto-Response-Suppress': 'All',
       },
-    });
+    };
+
+    // Send to staff
+    await transporter.sendMail({ ...mailOptions, to: process.env.STAFF_EMAIL_RECIPIENT });
+
+    // Send confirmation copy to customer
+    await transporter.sendMail({ ...mailOptions, to: customerEmail, subject: `Your Signed Transportation Agreement – ${name}` });
 
     return res.status(200).json({ status: 'ok' });
   } catch (err) {
