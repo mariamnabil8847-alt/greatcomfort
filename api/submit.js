@@ -36,13 +36,15 @@ module.exports = async function handler(req, res) {
     'Great Comfort Services — Signed Transportation Agreement',
     '--------------------------------------------------------',
     '',
-    `Passenger Name: ${name}`,
-    `Date Signed:    ${date}`,
-    `Agreed to Terms & Conditions: Yes`,
-    '',
     'TRANSPORTATION TERMS & CONDITIONS',
     '----------------------------------',
     ...terms.flatMap(t => [t.title, t.body, '']),
+    'The following passenger has read and agreed to the above Terms & Conditions:',
+    '',
+    `Passenger Name: ${name}`,
+    `Date Signed:    ${date}`,
+    `Agreed:         Yes`,
+    '',
     'Safety is our highest priority.',
     'Great Comfort Services',
   ].join('\n');
@@ -65,7 +67,14 @@ module.exports = async function handler(req, res) {
     <p style="margin:4px 0 0;color:#666;font-size:13px;">Transportation Agreement — Signed Notification</p>
   </div>
 
-  <p style="margin-bottom:16px;">A customer has signed the Transportation Terms &amp; Conditions.</p>
+  <!-- Terms & Conditions FIRST -->
+  <div style="margin-bottom:24px;">
+    <h3 style="color:#1a3a5c;margin:0 0 16px;font-size:15px;border-bottom:2px solid #1a3a5c;padding-bottom:8px;">Transportation Terms &amp; Conditions</h3>
+    ${termsHtml}
+  </div>
+
+  <!-- Passenger details after -->
+  <p style="margin-bottom:12px;">The following passenger has read and agreed to the above Terms &amp; Conditions:</p>
 
   <table style="border-collapse:collapse;width:100%;margin-bottom:24px;">
     <tr style="background:#f4f6f8;">
@@ -85,11 +94,6 @@ module.exports = async function handler(req, res) {
   <p style="font-weight:bold;margin-bottom:8px;">Electronic Signature:</p>
   <div style="border:1px solid #ccc;border-radius:4px;padding:8px;display:inline-block;background:#fff;margin-bottom:24px;">
     <img src="cid:signature@greatcomfort" alt="Electronic Signature" style="display:block;max-width:400px;max-height:150px;" />
-  </div>
-
-  <div style="border-top:2px solid #1a3a5c;padding-top:16px;margin-top:8px;">
-    <h3 style="color:#1a3a5c;margin:0 0 16px;font-size:15px;">Transportation Terms &amp; Conditions</h3>
-    ${termsHtml}
   </div>
 
   <div style="margin-top:24px;padding-top:16px;border-top:1px solid #eee;color:#888;font-size:12px;">
