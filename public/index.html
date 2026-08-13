@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Great Comfort Services — Transportation Terms & Conditions</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f4f6f8;
+      color: #1a1a1a;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #1a3a5c;
+      color: #fff;
+      padding: 1.25rem 1rem;
+      text-align: center;
+    }
+    header h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: 0.02em; }
+    header p  { font-size: 0.95rem; color: #a8c4e0; margin-top: 0.25rem; }
+
+    main {
+      flex: 1;
+      max-width: 780px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    /* Terms box */
+    .terms-box {
+      background: #fff;
+      border: 1px solid #dde4ed;
+      border-radius: 8px;
+      padding: 1.75rem;
+      margin-bottom: 1.75rem;
+    }
+    .terms-box h2 {
+      font-size: 1.2rem;
+      color: #1a3a5c;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #dde4ed;
+    }
+    .terms-section { margin-bottom: 1.25rem; }
+    .terms-section h3 { font-size: 1rem; color: #1a3a5c; margin-bottom: 0.4rem; }
+    .terms-section p  { font-size: 0.9rem; color: #444; line-height: 1.65; }
+
+    /* Form box */
+    .form-box {
+      background: #fff;
+      border: 1px solid #dde4ed;
+      border-radius: 8px;
+      padding: 1.75rem;
+    }
+
+    .acknowledgment {
+      background: #eef3f9;
+      border-left: 4px solid #4a90d9;
+      padding: 0.85rem 1rem;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.93rem;
+      color: #2c4a6e;
+      margin-bottom: 1.5rem;
+      line-height: 1.55;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      font-weight: 600;
+      font-size: 0.93rem;
+      margin-bottom: 0.35rem;
+      color: #2c2c2c;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="date"] {
+      padding: 0.55rem 0.75rem;
+      border: 1px solid #b0bcc8;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #fff;
+      transition: border-color 0.15s;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: #4a90d9;
+      box-shadow: 0 0 0 3px rgba(74,144,217,0.2);
+    }
+    .field-error { border-color: #c0392b !important; }
+    .error-msg {
+      color: #c0392b;
+      font-size: 0.83rem;
+      margin-top: 0.3rem;
+      min-height: 1.1em;
+      display: block;
+    }
+
+    /* Checkbox row */
+    .checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      cursor: pointer;
+      font-size: 0.93rem;
+    }
+    .checkbox-label input[type="checkbox"] {
+      margin-top: 0.22rem;
+      width: 1.1rem;
+      height: 1.1rem;
+      flex-shrink: 0;
+      accent-color: #1a3a5c;
+      cursor: pointer;
+    }
+
+    /* Signature */
+    .sig-label {
+      font-weight: 600;
+      font-size: 0.93rem;
+      margin-bottom: 0.35rem;
+      color: #2c2c2c;
+    }
+    .sig-hint { font-size: 0.82rem; color: #666; margin-bottom: 0.5rem; }
+    .sig-wrapper {
+      border: 1px solid #b0bcc8;
+      border-radius: 4px;
+      background: #fff;
+      overflow: hidden;
+      margin-bottom: 0.6rem;
+    }
+    #sig-canvas {
+      display: block;
+      width: 100%;
+      min-height: 160px;
+      cursor: crosshair;
+      touch-action: none;
+    }
+    .btn-clear {
+      background: #fff;
+      color: #1a3a5c;
+      border: 2px solid #1a3a5c;
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      font-size: 0.88rem;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-clear:hover { background: #e8f0f8; }
+
+    /* Submit */
+    .form-actions { margin-top: 1.75rem; }
+    .btn-submit {
+      background: #1a3a5c;
+      color: #fff;
+      border: none;
+      padding: 0.7rem 2rem;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover  { background: #255080; }
+    .btn-submit:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    /* Alerts */
+    .alert {
+      padding: 0.85rem 1rem;
+      border-radius: 4px;
+      margin-top: 1rem;
+      font-size: 0.93rem;
+      display: none;
+    }
+    .alert-error   { background: #fdf0ee; border: 1px solid #e5a09a; color: #922b21; }
+    .alert-success { background: #e8f5e9; border: 1px solid #a5d6a7; color: #1b5e20; font-size: 1rem; text-align: center; padding: 1.25rem; }
+
+    footer {
+      background: #1a3a5c;
+      color: #a8c4e0;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.88rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.3rem; }
+      .terms-box, .form-box { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>GREAT COMFORT SERVICES</h1>
+  <p>Transportation Terms &amp; Conditions</p>
+</header>
+
+<main>
+
+  <!-- Terms & Conditions -->
+  <div class="terms-box">
+    <h2>Transportation Terms &amp; Conditions</h2>
+
+    <div class="terms-section">
+      <h3>1. Trip Details</h3>
+      <p>Great Comfort Services will provide transportation to the destination specified at the time of booking. The pickup time, pickup location, and destination are confirmed upon reservation. Passengers are required to be ready at the specified pickup location no later than five (5) minutes before the scheduled pickup time. Great Comfort Services reserves the right to adjust routes to account for traffic, road conditions, or other unforeseen circumstances while making reasonable efforts to ensure on-time arrival. Any changes to the trip details must be communicated to Great Comfort Services as soon as possible and are subject to availability.</p>
+    </div>
+
+    <div class="terms-section">
+      <h3>2. Round-Trip Waiting Policy</h3>
+      <p>For round-trip bookings, Great Comfort Services will wait a maximum of fifteen (15) minutes beyond the agreed-upon return pickup time at no additional charge. Waiting time exceeding fifteen (15) minutes will be charged at the prevailing hourly rate, prorated in fifteen-minute increments. If the passenger has not appeared within forty-five (45) minutes and has not contacted Great Comfort Services, the driver may be reassigned and a no-show fee equivalent to the original return trip fare will apply.</p>
+    </div>
+
+    <div class="terms-section">
+      <h3>3. Safety and Wheelchair Acknowledgment</h3>
+      <p>The safety of all passengers is the highest priority of Great Comfort Services. All drivers are trained and certified in passenger assistance, defensive driving, and first-aid procedures. Wheelchair-accessible vehicles are equipped with securement systems that meet applicable safety standards. Passengers who use wheelchairs or other mobility devices must ensure that their device is in good working condition and safe for transport. Seatbelts and applicable restraints must be worn at all times during transit.</p>
+    </div>
+
+    <div class="terms-section">
+      <h3>4. Passenger Responsibilities</h3>
+      <p>Passengers are responsible for their conduct during the trip. Behaviour that endangers the driver, other passengers, or third parties, or that damages the vehicle, will result in immediate termination of the trip without refund. Passengers are responsible for all personal belongings; Great Comfort Services is not liable for loss or damage to personal items. Eating, drinking (other than water), and smoking are prohibited in all vehicles. Children must be secured in an appropriate child safety seat provided by the passenger.</p>
+    </div>
+
+    <div class="terms-section">
+      <h3>5. Cancellations and Reservation Changes</h3>
+      <p>Cancellations made at least twenty-four (24) hours before the scheduled pickup time will receive a full refund or credit. Cancellations made between two (2) and twenty-four (24) hours before will be subject to a cancellation fee of fifty percent (50%) of the trip fare. Cancellations made less than two (2) hours before the scheduled pickup time, or no-shows, will be charged the full trip fare. Reservation changes made at least twenty-four (24) hours in advance are accommodated at no additional charge, subject to availability.</p>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="form-box" id="form-section">
+    <div class="acknowledgment">
+      By booking or using the transportation services provided by Great Comfort Services, I acknowledge that I have read, understood, and agree to the above Terms and Conditions.
+    </div>
+
+    <form id="agreement-form" novalidate>
+
+      <!-- Passenger Name -->
+      <div class="form-group">
+        <label for="passenger-name">Passenger Name <span style="color:#c0392b">*</span></label>
+        <input type="text" id="passenger-name" name="passengerName" autocomplete="name" placeholder="Full name" />
+        <span class="error-msg" id="name-error"></span>
+      </div>
+
+      <!-- Date (auto-filled, read-only) -->
+      <div class="form-group">
+        <label for="sign-date">Date</label>
+        <input type="text" id="sign-date" name="signDate" readonly style="background:#f4f6f8; color:#555;" />
+      </div>
+
+      <!-- Checkbox -->
+      <div class="form-group">
+        <label class="checkbox-label">
+          <input type="checkbox" id="agree-checkbox" name="agreed" />
+          <span>I have read, understood, and agree to the Terms and Conditions.</span>
+        </label>
+        <span class="error-msg" id="checkbox-error"></span>
+      </div>
+
+      <!-- Signature -->
+      <div class="form-group">
+        <div class="sig-label">Electronic Signature <span style="color:#c0392b">*</span></div>
+        <p class="sig-hint">Draw your signature below using your mouse, finger, or stylus.</p>
+        <div class="sig-wrapper">
+          <canvas id="sig-canvas"></canvas>
+        </div>
+        <button type="button" class="btn-clear" id="clear-sig">Clear Signature</button>
+        <span class="error-msg" id="sig-error"></span>
+      </div>
+
+      <!-- Submit -->
+      <div class="form-actions">
+        <button type="submit" class="btn-submit" id="submit-btn">Submit Agreement</button>
+      </div>
+
+      <!-- Alerts -->
+      <div class="alert alert-error" id="submit-error">
+        Something went wrong. Please try again.
+      </div>
+    </form>
+
+    <!-- Success message (hidden until submission) -->
+    <div class="alert alert-success" id="success-msg" style="display:none;">
+      <strong>Thank you!</strong><br>
+      Your Transportation Terms &amp; Conditions have been successfully submitted.<br><br>
+      Your signed acknowledgment has been received by Great Comfort Services.
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Safety is our highest priority.
+</footer>
+
+<!-- SignaturePad from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+
+<script>
+(function () {
+  // ── Auto-fill date ───────────────────────────────────────────────────────
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  document.getElementById('sign-date').value = dateStr;
+
+  // ── Signature pad ────────────────────────────────────────────────────────
+  const canvas = document.getElementById('sig-canvas');
+  const pad    = new SignaturePad(canvas, { backgroundColor: 'rgb(255,255,255)' });
+
+  function resizeCanvas() {
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    const data  = pad.toData();
+    canvas.width  = canvas.offsetWidth  * ratio;
+    canvas.height = (canvas.offsetWidth * 0.35) * ratio; // ~35% aspect ratio
+    canvas.getContext('2d').scale(ratio, ratio);
+    pad.fromData(data);
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  document.getElementById('clear-sig').addEventListener('click', function () {
+    pad.clear();
+  });
+
+  // ── Form submission ──────────────────────────────────────────────────────
+  document.getElementById('agreement-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    // Clear previous errors
+    document.getElementById('name-error').textContent     = '';
+    document.getElementById('checkbox-error').textContent = '';
+    document.getElementById('sig-error').textContent      = '';
+    document.getElementById('submit-error').style.display = 'none';
+    document.getElementById('passenger-name').classList.remove('field-error');
+
+    const name    = document.getElementById('passenger-name').value.trim();
+    const agreed  = document.getElementById('agree-checkbox').checked;
+    const sigEmpty = pad.isEmpty();
+    let hasError  = false;
+
+    if (!name) {
+      document.getElementById('name-error').textContent = 'Passenger name is required.';
+      document.getElementById('passenger-name').classList.add('field-error');
+      hasError = true;
+    }
+    if (!agreed) {
+      document.getElementById('checkbox-error').textContent = 'You must accept the Terms and Conditions to proceed.';
+      hasError = true;
+    }
+    if (sigEmpty) {
+      document.getElementById('sig-error').textContent = 'A signature is required.';
+      hasError = true;
+    }
+
+    if (hasError) {
+      // Scroll to first error
+      const firstErr = document.querySelector('.error-msg:not(:empty)');
+      if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Disable submit while sending
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    try {
+      const payload = {
+        passengerName:    name,
+        signDate:         document.getElementById('sign-date').value,
+        agreed:           true,
+        signatureDataUrl: pad.toDataURL('image/png'),
+      };
+
+      const res = await fetch('/api/submit', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        document.getElementById('agreement-form').style.display = 'none';
+        document.getElementById('success-msg').style.display    = '';
+      } else {
+        document.getElementById('submit-error').style.display = '';
+        btn.disabled    = false;
+        btn.textContent = 'Submit Agreement';
+      }
+    } catch (err) {
+      document.getElementById('submit-error').style.display = '';
+      btn.disabled    = false;
+      btn.textContent = 'Submit Agreement';
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
