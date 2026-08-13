@@ -70,7 +70,8 @@ module.exports = async function handler(req, res) {
 
     await transporter.sendMail({
       from:    `"Great Comfort Services" <${process.env.GMAIL_USER}>`,
-      to:      process.env.STAFF_EMAIL_RECIPIENT, // comma-separated list supported
+      to:      process.env.STAFF_EMAIL_RECIPIENT,
+      replyTo: process.env.GMAIL_USER,
       subject: `New Signed Transportation Terms – ${passengerName.trim()}`,
       text:    emailText,
       html:    emailHtml,
